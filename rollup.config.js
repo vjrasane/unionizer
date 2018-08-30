@@ -23,7 +23,6 @@ export default {
       babel({
         babelrc: false,
         presets: [['env', { modules: false }]],
-        exclude: 'node_modules/**',
         plugins: [
           'external-helpers',
           'transform-class-properties',
