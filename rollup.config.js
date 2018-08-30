@@ -8,6 +8,7 @@ import { uglify } from 'rollup-plugin-uglify';
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
+  external: ['path', 'fs'],
   input: 'src/main.js',
   output: {
     file: 'dist/main.js',
@@ -15,16 +16,21 @@ export default {
     sourcemap: true
   },
   plugins: [
-    resolve(), // tells Rollup how to find date-fns in node_modules
-    commonjs(), // converts date-fns to ES modules
+    resolve(
+      // preferBuiltins: false
+    ),
     production &&
       babel({
         babelrc: false,
         presets: [['env', { modules: false }]],
-        externalHelpers: true,
         exclude: 'node_modules/**',
-        plugins: ['transform-object-rest-spread']
+        plugins: [
+          'external-helpers',
+          'transform-class-properties',
+          'transform-object-rest-spread'
+        ]
       }),
-    production && uglify() // minify, but only in production
+    commonjs(),
+    production && uglify()
   ]
 };
