@@ -1,0 +1,12 @@
+.gitignore
+.babelrc
+.eslintrc.json
+.travis.yml
+jest.config.js
+rollup.config.js
+yarn.lock
+src/
+test/
+node_modules/
+coverage/
+*.tgz
