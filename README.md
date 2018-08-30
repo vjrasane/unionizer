@@ -6,7 +6,7 @@
 [Coveralls]: https://coveralls.io/github/vjrasane/unionizer
 [ASL-2.0 badge]: https://img.shields.io/badge/License-Apache%202.0-blue.svg
 [ASL-2.0]: https://opensource.org/licenses/Apache-2.0
-[Travis]: https://travis-ci.org/vjrasane/unionizer?service=github
-[Travis badge]: https://travis-ci.org/vjrasane/unionizer.svg?branch=master
+[Travis badge]: https://travis-ci.org/vjrasane/unionizer.svg?branch=master?service=github
+[Travis]: https://travis-ci.org/vjrasane/unionizer
 [npm badge]: https://badge.fury.io/js/unionizer.svg?service=github
 [npm]: https://badge.fury.io/js/unionizer
