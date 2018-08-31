@@ -11,7 +11,7 @@ describe('chart', () => {
       files: {
         input: 'input.json',
         expected: 'expected.json',
-        required: []
+        required: ['input.json', 'expected.json']
       }
     });
     expect(spec).toEqual(expected);
@@ -31,7 +31,7 @@ describe('chart', () => {
       files: {
         input: 'input.json',
         expected: 'expected.json',
-        required: []
+        required: ['input.json', 'expected.json']
       }
     });
     expect(spec).toEqual(expectedNoSuite);

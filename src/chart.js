@@ -9,9 +9,6 @@ class Spec {
     if (this.options.files.input) {
       this.requiredFiles.push(this.options.files.input);
     }
-    if (this.options.files.expected) {
-      this.requiredFiles.push(this.options.files.expected);
-    }
   }
 
   requiredPresent = files => this.requiredFiles.every(req => req in files);
