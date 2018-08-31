@@ -1,0 +1,35 @@
+{
+  "dir1": {
+    "type": "dir",
+    "contents": {
+      "input.json": { "type": "doc", "contents": "input1" },
+      "expected.json": { "type": "doc", "contents": "expected1" }
+    }
+  },
+  "dir2": {
+    "type": "dir",
+    "contents": {
+      "input.json": {
+        "type": "doc",
+        "contents": "input2"
+      },
+      "subdir1": {
+        "type": "dir",
+        "contents": {
+          "expected.json": { "type": "doc", "contents": "expected2" }
+        }
+      },
+      "subdir2": {
+        "type": "dir",
+        "contents": {
+          "subsubdir": {
+            "type": "dir",
+            "contents": {
+              "expected.json": { "type": "doc", "contents": "expected3" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

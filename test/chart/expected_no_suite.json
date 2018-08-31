@@ -1,0 +1,6 @@
+{
+  "test": {
+    "files": { "expected.json": "expected1", "input.json": "input1" },
+    "name": "name"
+  }
+}

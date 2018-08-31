@@ -1,0 +1,10 @@
+{
+  "test": {
+    "files": {
+      "expected.json": "test",
+      "input.json": "test",
+      "expected_error.json": "error"
+    },
+    "name": "test"
+  }
+}

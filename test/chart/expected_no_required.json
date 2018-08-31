@@ -1,0 +1,40 @@
+{
+  "suite": {
+    "name": "name",
+    "suites": [
+      {
+        "name": "dir2",
+        "suites": [
+          {
+            "name": "subdir2",
+            "suites": [],
+            "tests": [
+              {
+                "files": {
+                  "expected.json": "expected3",
+                  "input.json": "input2"
+                },
+                "name": "subsubdir"
+              }
+            ]
+          }
+        ],
+        "tests": [
+          {
+            "files": { "expected.json": "expected2", "input.json": "input2" },
+            "name": "subdir1"
+          },
+          { "files": { "input.json": "input2" }, "name": "subdir2" }
+        ]
+      }
+    ],
+    "tests": [
+      {
+        "files": { "expected.json": "expected1", "input.json": "input1" },
+        "name": "dir1"
+      },
+      { "files": { "input.json": "input2" }, "name": "dir2" }
+    ]
+  },
+  "test": { "files": {}, "name": "name" }
+}

@@ -1,11 +1,3 @@
-export const mapArray = (array, mapper) => {
-  const mapped = {};
-  array.forEach(k => {
-    mapped[k] = mapper(k);
-  });
-  return mapped;
-};
-
 export const filterObj = (obj, filter) => {
   const filtered = {};
   Object.keys(obj)
@@ -14,5 +6,10 @@ export const filterObj = (obj, filter) => {
   return filtered;
 };
 
-export const isObject = value =>
-  value && typeof value === 'object' && value.constructor === Object;
+export const mapObj = (obj, mapper) => {
+  const mapped = {};
+  Object.keys(obj).forEach(k => {
+    mapped[k] = mapper(k, obj[k]);
+  });
+  return mapped;
+};

@@ -1,56 +1,39 @@
-import specs from './specs';
+import chart from './chart';
+import traverse from './traverse';
+import generate from './generate';
+import { join, dirname } from 'path';
 
-class Generator {
-  constructor (caller, func, options) {
-    this.caller = caller;
+const DEFAULT_FILES = {
+  input: 'input.json',
+  expected: 'expected.json',
+  expectedError: 'expected_error.json',
+  required: []
+};
 
-    this.options = options || {};
-    this.func = func;
-  }
+const DEFAULT_EXEC = input => input;
+const DEFAULT_VALIDATE = (result, expected) => expect(result).toEqual(expected);
+const DEFAULT_ERROR = (error, expectedError) =>
+  expect(error.message).toEqual(expectedError);
 
-  wrapper = (name, it) =>
-    name.endsWith('#skip') ? it.skip : name.endsWith('#only') ? it.only : it;
-
-  createSuite = spec => {
-    this.wrapper(spec.name, describe)(spec.name, () => {
-      spec.tests.forEach(t => this.createTest(t));
-      spec.suites.forEach(s => this.createSuite(s));
-    });
+const opts = o => {
+  const options = o || {};
+  const test = {
+    exec: DEFAULT_EXEC,
+    validate: DEFAULT_VALIDATE,
+    error: DEFAULT_ERROR,
+    ...options.test
   };
+  const files = { ...DEFAULT_FILES, ...options.files };
+  return { files, test };
+};
 
-  createTest = spec => {
-    this.wrapper(spec.name, it)(spec.name, () => {
-      const files = spec.files ? spec.files : {};
-      if (this.options.override) {
-        this.func(files);
-      } else {
-        try {
-          const result = this.func(files);
-          expect(result).toEqual(files.expected);
-        } catch (error) {
-          if (files.expected_error) {
-            expect(error.message).toEqual(files.expected_error);
-          } else {
-            throw error;
-          }
-        }
-      }
-    });
-  };
+const unionize = (caller, name, options) => {
+  const ops = opts(options);
+  const files = traverse(caller, join(dirname(caller.filename), name));
+  const spec = chart(name, files, ops);
+  return generate(spec, ops);
+};
 
-  generate = dirname => {
-    const spec = specs(this.caller, dirname, this.options);
-    if (spec.test) {
-      this.createTest(spec.test);
-    }
-    if (spec.suite) {
-      this.createSuite(spec.suite);
-    }
-  };
-}
+export const defaultOps = opts();
 
-const generate = (caller, dirname, func, options) => {
-  new Generator(caller, func, options).generate(dirname);
-}
-  
-export default generate;
+export default unionize;
