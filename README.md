@@ -228,9 +228,9 @@ unionize(module, 'testcase', {
   }
 });
 ```
-Note that the required files array overwrites the default array, rather than merges it, so every required file must be included.
+Note that the required files array overwrites the default array, rather than merges it, so every required file must be included. However, if the required files array is not specified, only input file is required by default. Thus you do not need to specify your input file in the required files, if it is the only file needed by your tests.
 
-Tests are only generated if each required file is present, either by inheritance from a parent directory or in the test directory itself.
+In any case, tests are only generated if each required file is present, either by inheritance from a parent directory or in the test directory itself.
 
 [Coverage badge]: https://coveralls.io/repos/github/vjrasane/unionizer/badge.svg?service=github
 [Coveralls]: https://coveralls.io/github/vjrasane/unionizer

@@ -15,7 +15,6 @@ export default {
   files: {
     input: 'input.json',
     expected: 'expected.json',
-    expectedError: 'expected_error.json',
-    required: ['input.json']
+    expectedError: 'expected_error.json'
   }
 };

@@ -5,7 +5,13 @@ class Spec {
   constructor (options) {
     this.options = options;
 
-    this.requiredFiles = [...this.options.files.required];
+    if (this.options.files.required) {
+      this.requiredFiles = this.options.files.required;
+    } else if (this.options.files.input) {
+      this.requiredFiles = [ this.options.files.input ];
+    } else {
+      this.requiredFiles = [];
+    }
   }
 
   getSuffixes = name => {

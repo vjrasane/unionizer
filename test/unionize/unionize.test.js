@@ -2,6 +2,6 @@ import unionize from '../../src/main';
 
 unionize(module, 'testcases', {
   files: {
-    required: ['expected.json']
+    required: ['input.json', 'expected.json']
   }
 });

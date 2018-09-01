@@ -1,0 +1,47 @@
+{
+  "suite": {
+    "name": "name",
+    "suites": [
+      {
+        "name": "dir2",
+        "skip": true,
+        "suites": [
+          {
+            "name": "subdir2",
+            "only": true,
+            "suites": [],
+            "tests": [
+              {
+                "files": {
+                  "expected.json": "expected3",
+                  "input.json": "input2"
+                },
+                "name": "subsubdir"
+              }
+            ]
+          }
+        ],
+        "tests": [
+          {
+            "files": { "expected.json": "expected2", "input.json": "input2" },
+            "name": "subdir1",
+            "only": true,
+            "skip": true
+          },
+          {
+            "files": { "input.json": "input2" },
+            "name": "subdir2",
+            "only": true
+          }
+        ]
+      }
+    ],
+    "tests": [
+      {
+        "files": { "expected.json": "expected1", "input.json": "input1" },
+        "name": "dir1"
+      },
+      { "files": { "input.json": "input2" }, "name": "dir2", "skip": true }
+    ]
+  }
+}
