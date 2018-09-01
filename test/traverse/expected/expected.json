@@ -3,14 +3,14 @@
     "type": "dir",
     "contents": { "file1.json": { "type": "doc", "contents": "file1" } }
   },
-  "dir2": {
+  "dir2.skip": {
     "type": "dir",
     "contents": {
-      "subdir1": {
+      "subdir1.only": {
         "type": "dir",
         "contents": { "file2.json": { "type": "doc", "contents": "file2" } }
       },
-      "subdir2": {
+      "subdir2.only.skip": {
         "type": "dir",
         "contents": {
           "subsubdir": {

@@ -4,13 +4,18 @@
     "suites": [
       {
         "name": "dir2",
+        "skip": true,
         "suites": [
           {
             "name": "subdir2",
+            "only": true,
             "suites": [],
             "tests": [
               {
-                "files": { "expected.json": "expected3", "input.json": "input2" },
+                "files": {
+                  "expected.json": "expected3",
+                  "input.json": "input2"
+                },
                 "name": "subsubdir"
               }
             ]
@@ -19,7 +24,9 @@
         "tests": [
           {
             "files": { "expected.json": "expected2", "input.json": "input2" },
-            "name": "subdir1"
+            "name": "subdir1",
+            "only": true,
+            "skip": true
           }
         ]
       }

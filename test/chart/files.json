@@ -6,20 +6,20 @@
       "expected.json": { "type": "doc", "contents": "expected1" }
     }
   },
-  "dir2": {
+  "dir2.skip": {
     "type": "dir",
     "contents": {
       "input.json": {
         "type": "doc",
         "contents": "input2"
       },
-      "subdir1": {
+      "subdir1.only.skip": {
         "type": "dir",
         "contents": {
           "expected.json": { "type": "doc", "contents": "expected2" }
         }
       },
-      "subdir2": {
+      "subdir2.only": {
         "type": "dir",
         "contents": {
           "subsubdir": {

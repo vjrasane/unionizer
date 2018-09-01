@@ -23,9 +23,11 @@
     "console": true,
     "describe": true,
     "it": true,
+    "beforeEach" : true,
     "module": true,
     "expect": true,
-    "__dirname": true
+    "__dirname": true,
+    "jest": true
   },
 
   "rules": {

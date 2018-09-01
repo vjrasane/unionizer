@@ -1,10 +1,26 @@
 class Generator {
   constructor (options) {
     this.options = options;
+
+    this.test = it;
+    this.suite = describe;
+    // allow mocking test and suite functions in tests
+    if (process.env.NODE_ENV !== 'production' && this.options.test.mocks) {
+      this.test = this.options.test.mocks.test;
+      this.suite = this.options.test.mocks.suite;
+    }
   }
 
-  wrapper = (name, it) =>
-    name.endsWith('#skip') ? it.skip : name.endsWith('#only') ? it.only : it;
+  wrapper = (spec, tester) => {
+    let wrapped = tester;
+    if (spec.skip) {
+      wrapped = wrapped.skip;
+    }
+    if (spec.only) {
+      wrapped = wrapped.only;
+    }
+    return wrapped;
+  };
 
   defaultTest = files => {
     try {
@@ -28,19 +44,18 @@ class Generator {
   };
 
   createSuite = spec => {
-    this.wrapper(spec.name, describe)(spec.name, () => {
+    this.wrapper(spec, this.suite)(spec.name, () => {
       spec.tests.forEach(t => this.createTest(t));
       spec.suites.forEach(s => this.createSuite(s));
     });
   };
 
   createTest = spec => {
-    this.wrapper(spec.name, it)(spec.name, () => {
-      const files = spec.files ? spec.files : {};
+    this.wrapper(spec, this.test)(spec.name, () => {
       if (this.options.test.override) {
-        this.options.test.override(files);
+        this.options.test.override(spec.files);
       } else {
-        this.defaultTest(files);
+        this.defaultTest(spec.files);
       }
     });
   };

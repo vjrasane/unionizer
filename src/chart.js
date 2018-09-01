@@ -6,10 +6,32 @@ class Spec {
     this.options = options;
 
     this.requiredFiles = [...this.options.files.required];
-    if (this.options.files.input) {
-      this.requiredFiles.push(this.options.files.input);
-    }
   }
+
+  getSuffixes = name => {
+    const result = { name };
+    const skipSuffix = this.options.test.skipSuffix;
+    const onlySuffix = this.options.test.onlySuffix;
+
+    if (skipSuffix && result.name.endsWith(this.options.test.skipSuffix)) {
+      result.skip = true;
+      result.name = result.name.substring(
+        0,
+        result.name.length - skipSuffix.length
+      );
+      return { ...result, ...this.getSuffixes(result.name) };
+    }
+
+    if (onlySuffix && result.name.endsWith(this.options.test.onlySuffix)) {
+      result.only = true;
+      result.name = result.name.substring(
+        0,
+        result.name.length - onlySuffix.length
+      );
+      return { ...result, ...this.getSuffixes(result.name) };
+    }
+    return result;
+  };
 
   requiredPresent = files => this.requiredFiles.every(req => req in files);
 
@@ -29,7 +51,7 @@ class Spec {
     const files = { ...parentFiles, ...docs };
 
     const suite = {
-      name,
+      ...this.getSuffixes(name),
       suites: this.suiteSpecs(dirs, files),
       tests: this.testSpecs(dirs, files)
     };
@@ -42,9 +64,11 @@ class Spec {
   testSpec = (name, dir, parentFiles) => {
     const docs = filterObj(dir, (name, file) => file.type === DOC_TYPE);
     const files = { ...parentFiles, ...docs };
-
     if (this.requiredPresent(files)) {
-      return { name, files: mapObj(files, (name, file) => file.contents) };
+      return {
+        ...this.getSuffixes(name),
+        files: mapObj(files, (name, file) => file.contents)
+      };
     }
   };
 
