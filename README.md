@@ -8,6 +8,7 @@ Generates Jest unit tests from input-output file pairs in given file structure.
 
 - [Installation](#installation)
 - [Usage](#usage)
+  * [Importing](#importing)
   * [Generating testcases](#generating-testcases)
   * [Test hierarchy](#test-hierarchy)
   * [Expecting errors](#expecting-errors)
@@ -30,6 +31,19 @@ $ yarn add unionizer --dev
 
 ## Usage
 
+### Importing
+
+Unionizer exposes the **unionize** function as its default export.
+
+#### ES6
+```javascript
+import unionize from 'unionizer';
+```
+#### CommonJS
+```javascript
+const unionize = require('unionizer');
+```
+
 ### Generating testcases
 
 The most basic usage of unionizer is to create a testcase directory that contains an input and output JSON file:
@@ -41,8 +55,6 @@ The most basic usage of unionizer is to create a testcase directory that contain
 Then in the same directory, create a Jest test suite (Jest has to be installed and configured):
 
 ```javascript
-import unionize from 'unionizer';
-
 unionize(module, 'testcase', {
   test: {
     exec: myTestFunction
